@@ -123,7 +123,7 @@ def password_strength():
 
     
 root = tk.Tk()
-root.title("Function Selector")
+root.title("CipherVault")
 
 label = tk.Label(root, text="Select a function to execute:")
 label.pack()
