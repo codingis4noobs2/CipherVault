@@ -1,7 +1,6 @@
 # CipherVault
 Collection of various ciphers and other handful of tools
 
-# This is the documentation for a Python program that includes four different functions:
 
 1. Rail Cipher
 2. Morse Code
