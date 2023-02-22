@@ -6,6 +6,7 @@ Collection of various ciphers and other handful of tools
 2. Morse Code
 3. Password Generator
 4. Password Strength Checker
+5. Base32 Encoding/Decoding
 
 ## Rail Cipher
 The rail cipher is a type of transposition cipher that rearranges the letters of a message to create a new, encrypted message. The function includes two sub-functions: encrypt and decrypt.
@@ -46,6 +47,15 @@ password_strength_checker(password: str) -> str
 # The password_strength_checker function takes one parameter: password is the password that will be checked for strength. The function returns a string that represents the strength of the password. The possible values are "Weak", "Medium", and "Strong".
 ```
 
+## Base32 Encoding/Decoding
+The Base32 code is an encoding standard described in RFC 4648 in order to facilitate the transmission of binary strings via 32 characters of the ASCII table.
+```python
+base32_encode(string: str) -> bytes
+# This base32_encode function takes one parameter: message is the original string that will be encrypted using base32.
+
+base32_decode(encoded_bytes: bytes) -> str
+# This base32_encode function takes one parameter: encrypted_message is the message that will be decrypted using base32.
+```
 
 Main Program
 The main program includes calls to all four functions.
@@ -54,4 +64,5 @@ rail_cipher(): Calls the rail cipher function and prints the encrypted and decry
 morse_code(): Calls the Morse code function and prints the encrypted and decrypted messages.
 password_generator(): Calls the password generator function and prints the generated password.
 password_strength(): Calls the password strength checker function and prints the strength of a given password.
+base32(): Calls the base32 function and prints the encrypted and decrypted messages.
 ```
