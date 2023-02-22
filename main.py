@@ -1,7 +1,7 @@
 import tkinter as tk
 import string
 import random
-
+import base64
 
 def rail_cipher():
     def encrypt(input_string: str, key: int) -> str:
@@ -57,6 +57,18 @@ def rail_cipher():
     print("Rail Cipher")
     print("Encrypted Text: f{encrypt(input_string, key)}")
     print("Decrypted Text: f{decrypt(encrypt(input_string, key), key)}")
+
+def base32():
+    def base32_encode(string: str) -> bytes:
+        return base64.b32encode(string.encode("utf-8"))
+    
+    def base32_decode(encoded_bytes: bytes) -> str:
+        return base64.b32decode(encoded_bytes).decode("utf-8")
+
+    msg = "hello"
+    print(f"Original Msg: {msg}")
+    print(f"Encrypted Msg: {base32_encode(msg)}")
+    print(f"Decrypted Msg: {base32_decode(base32_encode(msg))}")
 
 def morse_code():
     MORSE_CODE_DICT = {
@@ -131,13 +143,14 @@ label.pack()
 function_var = tk.StringVar()
 function_var.set("")
 
-function_options = ["Password Generator", "Password Strength Checker", "Rail Cipher", "Morse Code Encrypt/Decrypt"]
+function_options = ["Password Generator", "Password Strength Checker", "Rail Cipher Encrypt/Decrypt", "Morse Code Encrypt/Decrypt", "Base32 Encrypt/Decrypt"]
 
 function_dict = {
     "Rail Cipher": rail_cipher,
     "Password Generator": password_generator,
     "Password Strength Checker": password_strength,
-    "Morse Code Encrypt/Decrypt": morse_code
+    "Morse Code Encrypt/Decrypt": morse_code,
+    "Base32 Encrypt/Decrypt": base32
 }
 
 function_menu = tk.OptionMenu(root, function_var, *function_options)
