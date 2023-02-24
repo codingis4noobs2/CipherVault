@@ -105,6 +105,73 @@ def morse_code():
     msg = "hello"
     print(f"Encrypted Text: {encrypt(msg)}")
     print(f"Decrypted Text: {decrypt(encrypt(msg))}")
+
+def ceaser_cipher():
+    def encrypt(text, key):
+        result = ""
+        for i in range(len(text)):
+            char = text[i]
+            if char.isupper():
+                result += chr((ord(char) + key - 65) % 26 + 65)
+            elif char.islower():
+                result += chr((ord(char) + key - 97) % 26 + 97)
+            else:
+                result += char
+        return result
+
+    def decrypt(text, key):
+        result = ""
+        for i in range(len(text)):
+            char = text[i]
+            if char.isupper():
+                result += chr((ord(char) - key - 65) % 26 + 65)
+            elif char.islower():
+                result += chr((ord(char) - key - 97) % 26 + 97)
+            else:
+                result += char
+        return result
+        
+    msg = "hello"
+    key = 10
+    print(f"Encrypted Text: {encrypt(msg, key)}")
+    print(f"Decrypted Text: {decrypt(encrypt(msg, key), key)}")
+
+def onepad_cipher():
+    def encrypt(text: str) -> tuple[list[int], list[int]]:
+        """Function to encrypt text using pseudo-random numbers"""
+        plain = [ord(i) for i in text]
+        key = []
+        cipher = []
+        for i in plain:
+            k = random.randint(1, 300)
+            c = (i + k) * k
+            cipher.append(c)
+            key.append(k)
+        return cipher, key
+
+    def decrypt(cipher: list[int], key: list[int]) -> str:
+        """Function to decrypt text using pseudo-random numbers."""
+        plain = []
+        for i in range(len(key)):
+            p = int((cipher[i] - (key[i]) ** 2) / key[i])
+            plain.append(chr(p))
+        return "".join(plain)
+
+    msg, key = encrypt("hello")
+    print(f"Encrypted Text: {msg}")
+    print(f"Decrypted Text: {decrypt(msg, key)}")
+
+def calc_gcd():
+    def greatest_common_divisor(a: int, b: int) -> int:
+        if a < b:
+            a, b = b, a
+        while a % b != 0:
+            a, b = b, a % b
+        return b
+
+    a = 10
+    b = 5
+    print(f"GCD of {a} and {b} is {greatest_common_divisor(a, b)}")    
     
 def password_generator():
     def generate_password(length):
@@ -133,6 +200,8 @@ def password_strength():
     password = "Password"
     print(f"Password Strength: {password_strength_checker(password)}")
 
+def select_op():
+    print("Please choose one of the options given below")
     
 root = tk.Tk()
 root.title("CipherVault")
@@ -143,14 +212,18 @@ label.pack()
 function_var = tk.StringVar()
 function_var.set("")
 
-function_options = ["Password Generator", "Password Strength Checker", "Rail Cipher Encrypt/Decrypt", "Morse Code Encrypt/Decrypt", "Base32 Encrypt/Decrypt"]
+function_options = ["Select a option", "Password Generator", "Password Strength Checker", "Rail Cipher Encrypt/Decrypt", "Morse Code Encrypt/Decrypt", "Base32 Encrypt/Decrypt", "Ceaser Cipher Encrypt/Decrypt", "Calculate GCD", "Onepad Cipher Encrypt/Decrypt"]
 
 function_dict = {
+    "Select a option": select_op,
     "Rail Cipher": rail_cipher,
     "Password Generator": password_generator,
     "Password Strength Checker": password_strength,
     "Morse Code Encrypt/Decrypt": morse_code,
-    "Base32 Encrypt/Decrypt": base32
+    "Base32 Encrypt/Decrypt": base32,
+    "Ceaser Cipher Encrypt/Decrypt": ceaser_cipher,
+    "Calculate GCD": calc_gcd,
+    "Onepad Cipher Encrypt/Decrypt": onepad_cipher
 }
 
 function_menu = tk.OptionMenu(root, function_var, *function_options)
